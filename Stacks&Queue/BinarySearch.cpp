@@ -1,0 +1,57 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int binarySearch(int arr[], int beg, int end, int item) {
+
+    if (beg > end)
+        return -1;
+
+    int mid = (beg + end) / 2;
+
+    if (arr[mid] == item)
+        return mid;
+
+    if (item < arr[mid])
+        return binarySearch(arr, beg, mid - 1, item);
+
+    return binarySearch(arr, mid + 1, end, item);
+}
+
+int main() {
+
+    int n;
+
+    cout << "Enter the size of the array: ";
+    cin >> n;
+
+    if (n <= 0) {
+        cout << "Array size must be a positive number" << endl;
+        return 0;
+    }
+
+    int* arr = new int[n];
+
+    cout << "Enter " << n << " elements in sorted order:" << endl;
+
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int item;
+
+    cout << "Enter the element to search for: ";
+    cin >> item;
+
+    int loc = binarySearch(arr, 0, n - 1, item);
+
+    if (loc == -1) {
+        cout << "Element not found" << endl;
+    }
+    else {
+        cout << "Element found at index " << loc << endl;
+    }
+
+    delete[] arr;
+
+    return 0;
+}
